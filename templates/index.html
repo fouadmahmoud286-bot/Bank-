@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="login-wrapper">
+    <div class="header">
+        <h1>Welcome to <span class="highlight">Mahmoud Bank</span></h1>
+        <p>Values • Security • Trust</p>
+    </div>
+
+    <div class="card-container">
+        <!-- Register Form -->
+        <div class="card">
+            <h2>Create Account</h2>
+            <form action="{{ url_for('create_account') }}" method="POST">
+                <div class="input-group">
+                    <label>Full Name</label>
+                    <input type="text" name="name" required placeholder="Ex: Mahmoud Hassan">
+                </div>
+                <div class="input-group">
+                    <label>Initial Deposit (EGP)</label>
+                    <input type="number" name="initial_balance" step="0.01" required placeholder="Ex: 5000">
+                </div>
+                <button type="submit" class="btn primary-btn">Create Account</button>
+            </form>
+        </div>
+
+        <div class="divider">
+            <span>OR</span>
+        </div>
+
+        <!-- Login Form -->
+        <div class="card login-card">
+            <h2>Login</h2>
+            <form action="{{ url_for('login') }}" method="POST">
+                <div class="input-group">
+                    <label>Account Number</label>
+                    <input type="number" name="account_number" required placeholder="Enter Account ID">
+                </div>
+                <button type="submit" class="btn secondary-btn">Access Account</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

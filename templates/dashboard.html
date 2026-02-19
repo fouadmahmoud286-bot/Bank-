@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<nav class="navbar">
+    <div class="logo">Mahmoud Bank</div>
+    <div class="user-info">
+        <span>Welcome, {{ account.name }}</span>
+        <a href="{{ url_for('logout') }}" class="btn logout-btn">Logout</a>
+    </div>
+</nav>
+
+<div class="dashboard-container">
+    <!-- Account Overview -->
+    <div class="card balance-card">
+        <h3>Current Balance</h3>
+        <div class="balance-amount">{{ account.balance }} EGP</div>
+        <p class="account-number">Account #: {{ account.account_number }}</p>
+    </div>
+
+    <!-- Actions Grid -->
+    <div class="actions-grid">
+        <!-- Deposit -->
+        <div class="card action-card">
+            <h3>Deposit Money</h3>
+            <form id="depositForm">
+                <div class="input-group">
+                    <input type="number" id="depositAmount" placeholder="Amount (EGP)" required>
+                </div>
+                <button type="submit" class="btn success-btn">Deposit</button>
+            </form>
+        </div>
+
+        <!-- Withdraw -->
+        <div class="card action-card">
+            <h3>Withdraw Money</h3>
+            <form id="withdrawForm">
+                <div class="input-group">
+                    <input type="number" id="withdrawAmount" placeholder="Amount (EGP)" required>
+                </div>
+                <button type="submit" class="btn danger-btn">Withdraw</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Daily Offers Section -->
+    <div class="offers-section">
+        <h2>🔥 Daily Exclusive Offers</h2>
+        <div class="offers-grid">
+            <div class="offer-card">
+                <div class="icon">🏠</div>
+                <h4>Home Loan</h4>
+                <p>Get 2% interest rate for the first year!</p>
+                <button class="btn sm-btn">Apply Now</button>
+            </div>
+            <div class="offer-card">
+                <div class="icon">🚗</div>
+                <h4>Car Insurance</h4>
+                <p>20% off on premium car insurance today.</p>
+                <button class="btn sm-btn">Details</button>
+            </div>
+            <div class="offer-card">
+                <div class="icon">💳</div>
+                <h4>Gold Card</h4>
+                <p>Zero fees for the first 3 months.</p>
+                <button class="btn sm-btn">Get Card</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

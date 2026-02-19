@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="{{ lang }}" dir="{{ 'rtl' if lang == 'ar' else 'ltr' }}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ text.title }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Cairo:wght@400;700&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        body {
+            font-family: {
+                    {
+                    "'Cairo', sans-serif" if lang=='ar' else "'Poppins', sans-serif"
+                }
+            }
+
+            ;
+        }
+
+        .lang-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 74, 173, 0.1);
+            color: #004aad;
+            padding: 8px 15px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+            z-index: 1000;
+        }
+
+        .lang-btn:hover {
+            background: #004aad;
+            color: white;
+        }
+
+        html[dir="rtl"] .lang-btn {
+            left: 20px;
+            right: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <a href="{{ url_for('set_lang', lang_code='ar' if lang == 'en' else 'en') }}" class="lang-btn">
+        {{ text.lang_btn }}
+    </a>
+
+    <div class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <script>
+            Swal.fire({
+                title: "{{ text.success if category == 'success' else text.error }}",
+                text: "{{ message }}",
+                icon: "{{ category }}",
+                confirmButtonColor: '#004aad'
+            });
+        </script>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+
+</html>
